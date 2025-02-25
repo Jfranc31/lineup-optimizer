@@ -1,0 +1,1581 @@
+{
+    "team_name": "Pro Clubs FC",
+    "players": {
+        "Andre": {
+            "name": "Andre",
+            "positions": {
+                "GK": {
+                    "min": 0.5,
+                    "max": 0.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 1.0
+                        }
+                    ]
+                },
+                "LB": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CB": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "RB": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CDM": {
+                    "min": 1.5,
+                    "max": 1.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "CM": {
+                    "min": 3.5,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "LM": {
+                    "min": 3.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "RM": {
+                    "min": 3.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "CAM": {
+                    "min": 4.5,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "LW": {
+                    "min": 4.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "RW": {
+                    "min": 4.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "ST": {
+                    "min": 4.0,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                }
+            }
+        },
+        "David": {
+            "name": "David",
+            "positions": {
+                "GK": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "LB": {
+                    "min": 1.0,
+                    "max": 1.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "CB": {
+                    "min": 1.0,
+                    "max": 1.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "RB": {
+                    "min": 1.0,
+                    "max": 1.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "CDM": {
+                    "min": 4.5,
+                    "max": 4.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "CM": {
+                    "min": 4.5,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "LM": {
+                    "min": 4.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "RM": {
+                    "min": 4.0,
+                    "max": 4.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "CAM": {
+                    "min": 4.5,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "LW": {
+                    "min": 4.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "RW": {
+                    "min": 4.0,
+                    "max": 4.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "ST": {
+                    "min": 4.0,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                }
+            }
+        },
+        "Dacir": {
+            "name": "Dacir",
+            "positions": {
+                "GK": {
+                    "min": 1.0,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "LB": {
+                    "min": 1.0,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CB": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "RB": {
+                    "min": 1.0,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CDM": {
+                    "min": 1.5,
+                    "max": 2.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "CM": {
+                    "min": 3.5,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "LM": {
+                    "min": 3.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "RM": {
+                    "min": 3.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "CAM": {
+                    "min": 4.0,
+                    "max": 4.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "LW": {
+                    "min": 4.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "RW": {
+                    "min": 4.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "ST": {
+                    "min": 4.5,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                }
+            }
+        },
+        "Rahul": {
+            "name": "Rahul",
+            "positions": {
+                "GK": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "LB": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "CB": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "RB": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "CDM": {
+                    "min": 1.5,
+                    "max": 2.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "CM": {
+                    "min": 3.0,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "LM": {
+                    "min": 3.5,
+                    "max": 3.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "RM": {
+                    "min": 4.5,
+                    "max": 4.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "CAM": {
+                    "min": 2.5,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "LW": {
+                    "min": 3.0,
+                    "max": 3.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "RW": {
+                    "min": 4.5,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "ST": {
+                    "min": 3.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                }
+            }
+        },
+        "Diego": {
+            "name": "Diego",
+            "positions": {
+                "GK": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "LB": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CB": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "RB": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CDM": {
+                    "min": 4.0,
+                    "max": 4.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "CM": {
+                    "min": 4.0,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "LM": {
+                    "min": 4.5,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "RM": {
+                    "min": 4.0,
+                    "max": 4.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "CAM": {
+                    "min": 4.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "LW": {
+                    "min": 5.0,
+                    "max": 5.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 5.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 5.0,
+                            "max": 5.0
+                        }
+                    ]
+                },
+                "RW": {
+                    "min": 4.0,
+                    "max": 4.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 5.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 4.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "ST": {
+                    "min": 3.5,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 4.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                }
+            }
+        },
+        "Jean": {
+            "name": "Jean",
+            "positions": {
+                "GK": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "LB": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "CB": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "RB": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "CDM": {
+                    "min": 0.5,
+                    "max": 0.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 1.0
+                        }
+                    ]
+                },
+                "CM": {
+                    "min": 1.5,
+                    "max": 2.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 2.0,
+                            "max": 2.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "LM": {
+                    "min": 2.5,
+                    "max": 2.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "RM": {
+                    "min": 3.0,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "CAM": {
+                    "min": 1.5,
+                    "max": 2.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 1.0,
+                            "max": 2.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "LW": {
+                    "min": 3.0,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "RW": {
+                    "min": 3.0,
+                    "max": 3.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "ST": {
+                    "min": 2.5,
+                    "max": 2.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 2.0,
+                            "max": 2.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                }
+            }
+        },
+        "Wilkins": {
+            "name": "Wilkins",
+            "positions": {
+                "GK": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "LB": {
+                    "min": 2.0,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CB": {
+                    "min": 3.0,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "RB": {
+                    "min": 3.0,
+                    "max": 4.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 4.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "CDM": {
+                    "min": 2.5,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "CM": {
+                    "min": 1.0,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "LM": {
+                    "min": 1.0,
+                    "max": 1.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 1.0,
+                            "max": 2.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 1.0
+                        }
+                    ]
+                },
+                "RM": {
+                    "min": 1.5,
+                    "max": 2.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 1.0,
+                            "max": 2.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "CAM": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "LW": {
+                    "min": 2.0,
+                    "max": 2.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 2.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "RW": {
+                    "min": 2.5,
+                    "max": 3.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 2.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 4.0
+                        }
+                    ]
+                },
+                "ST": {
+                    "min": 2.5,
+                    "max": 2.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 2.0,
+                            "max": 2.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                }
+            }
+        },
+        "D'Mario": {
+            "name": "D'Mario",
+            "positions": {
+                "GK": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "LB": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CB": {
+                    "min": 1.5,
+                    "max": 2.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 2.0,
+                            "max": 2.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "RB": {
+                    "min": 1.5,
+                    "max": 2.5,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 2.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CDM": {
+                    "min": 3.0,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 3.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 3.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "CM": {
+                    "min": 2.0,
+                    "max": 3.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 2.0,
+                            "max": 3.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 3.0
+                        }
+                    ]
+                },
+                "LM": {
+                    "min": 1.0,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "RM": {
+                    "min": 1.0,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 2.0,
+                            "max": 2.0
+                        }
+                    ]
+                },
+                "CAM": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "LW": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "RW": {
+                    "min": 0.0,
+                    "max": 0.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 0.0,
+                            "max": 0.0
+                        }
+                    ]
+                },
+                "ST": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "votes": [
+                        {
+                            "voter": "Andre",
+                            "min": 0.0,
+                            "max": 0.0
+                        },
+                        {
+                            "voter": "David",
+                            "min": 1.0,
+                            "max": 2.0
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
