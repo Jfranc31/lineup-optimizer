@@ -1,4 +1,3 @@
-# main.py
 import os
 from Player_Stats import Team
 from rich.console import Console
@@ -7,61 +6,69 @@ from rich import box
 from rich import print
 from tabulate import tabulate
 
+# Constants
 POSITIONS = ["GK", "LB", "CB", "RB", "CDM", "CM", "LM", "RM", "CAM", "LW", "RW", "ST"]
+WIDTH = 75
+HEIGHT = 25
 console = Console()
 
+# ---------------------------------------------------------------------------
+# Formation Layouts and Configurations
+# ---------------------------------------------------------------------------
+
 # Define available formations and their positions with improved spacing
+# POS: (x going down, y going right)
 FORMATION_LAYOUTS = {
     "4-3-3 attacking": {
         "ST": (3, 35),
-        "LW": (3, 15),  # Moved further left
-        "RW": (3, 55),  # Moved further right
+        "LW": (3, 15),
+        "RW": (3, 55),
         "CAM": (7, 35),
-        "LCM": (11, 20),  # Spread midfield
-        "RCM": (11, 50),  # Spread midfield
-        "LB": (18, 10),   # Moved further left
-        "LCB": (18, 28),  # Adjusted center backs
-        "RCB": (18, 42),  # Adjusted center backs
-        "RB": (18, 65),   # Moved further right
+        "LCM": (11, 20),
+        "RCM": (11, 50),
+        "LB": (18, 10),
+        "LCB": (18, 28),
+        "RCB": (18, 42),
+        "RB": (18, 65),
         "GK": (23, 36)
     },
     "4-3-3 defending": {
         "ST": (3, 35),
-        "LW": (3, 15),  # Moved further left
-        "RW": (3, 55),  # Moved further right
-        "LCM": (9, 20),  # Spread midfield
-        "RCM": (9, 50),  # Spread midfield
+        "LW": (3, 15),
+        "RW": (3, 55),
+        "LCM": (9, 20),
+        "RCM": (9, 50),
         "CDM": (11, 35),
-        "LB": (18, 10),   # Moved further left
-        "LCB": (18, 28),  # Adjusted center backs
-        "RCB": (18, 42),  # Adjusted center backs
-        "RB": (18, 65),   # Moved further right
+        "LB": (18, 10),
+        "LCB": (18, 28),
+        "RCB": (18, 42),
+        "RB": (18, 65),
         "GK": (23, 36)
     },
     "4-3-1-2": {
         "ST1": (3, 25),
         "ST2": (3, 45),
         "CAM": (7, 35),
-        "LCM": (11, 20),  # Spread midfield
+        "LCM": (11, 20),
         "CM": (11, 35),
-        "RCM": (11, 50),  # Spread midfield
-        "LB": (18, 10),   # Moved further left
+        "RCM": (11, 50),
+        "LB": (18, 10),
         "LCB": (18, 28),
         "RCB": (18, 42),
-        "RB": (18, 65),   # Moved further right
+        "RB": (18, 65),
         "GK": (23, 36)
     },
     "4-2-3-1": {
         "ST": (3, 35),
-        "LAM": (7, 15),   # Moved further left
+        "LAM": (7, 15),
         "CAM": (7, 35),
-        "RAM": (7, 55),   # Moved further right
+        "RAM": (7, 55),
         "CDM1": (11, 25),
         "CDM2": (11, 45),
-        "LB": (18, 10),   # Moved further left
+        "LB": (18, 10),
         "LCB": (18, 28),
         "RCB": (18, 42),
-        "RB": (18, 65),   # Moved further right
+        "RB": (18, 65),
         "GK": (23, 36)
     },
     "5-2-1-2": {
@@ -70,11 +77,102 @@ FORMATION_LAYOUTS = {
         "CAM": (7, 35),
         "CM1": (11, 25),
         "CM2": (11, 45),
-        "LWB": (18, 8),    # Moved further left
+        "LWB": (18, 8),
         "LCB": (18, 25),
-        "RCB": (18, 35),
-        "CB3": (18, 45),
-        "RWB": (18, 65),   # Moved further right
+        "CB": (18, 36),
+        "RCB": (18, 48),
+        "RWB": (18, 67),
+        "GK": (23, 36)
+    },
+    "4-4-2": {
+        "ST1": (3, 25),
+        "ST2": (3, 45),
+        "LM": (9, 10),
+        "LCM": (9, 25), 
+        "RCM": (9, 45),
+        "RM": (9, 60),
+        "LB": (18, 10),
+        "LCB": (18, 28),
+        "RCB": (18, 42),
+        "RB": (18, 65),
+        "GK": (23, 36)
+    },
+    "4-4-2 diamond": {
+        "ST1": (3, 25),
+        "ST2": (3, 45),
+        "CAM": (7, 35),
+        "LCM": (10, 25),
+        "RCM": (10, 45),
+        "CDM": (13, 35),
+        "LB": (18, 10),
+        "LCB": (18, 28),
+        "RCB": (18, 42),
+        "RB": (18, 65),
+        "GK": (23, 36)
+    },
+    "3-5-2": {
+        "ST1": (3, 25),
+        "ST2": (3, 45),
+        "LM": (9, 5),
+        "LCM": (9, 25),
+        "CM": (9, 35),
+        "RCM": (9, 45),
+        "RM": (9, 65),
+        "LCB": (18, 25),
+        "CB": (18, 36),
+        "RCB": (18, 48),
+        "GK": (23, 36)
+    },
+    "5-3-2": {
+        "ST1": (3, 25),
+        "ST2": (3, 45),
+        "LCM": (9, 25),
+        "CM": (9, 35),
+        "RCM": (9, 45),
+        "LWB": (15, 8),
+        "LCB": (18, 25),
+        "CB": (18, 36),
+        "RCB": (18, 48),
+        "RWB": (15, 67),
+        "GK": (23, 36)
+    },
+    "4-1-4-1": {
+        "ST": (3, 35),
+        "LM": (7, 10),
+        "LCM": (7, 25),
+        "RCM": (7, 45),
+        "RM": (7, 60),
+        "CDM": (11, 35),
+        "LB": (18, 10),
+        "LCB": (18, 28),
+        "RCB": (18, 42),
+        "RB": (18, 65),
+        "GK": (23, 36)
+    },
+    "3-4-3": {
+        "ST": (3, 35),
+        "LW": (3, 15),
+        "RW": (3, 55),
+        "LM": (9, 10),
+        "LCM": (9, 25),
+        "RCM": (9, 45),
+        "RM": (9, 60),
+        "LCB": (18, 25),
+        "CB": (18, 36),
+        "RCB": (18, 48),
+        "GK": (23, 36)
+    },
+    "4-5-1": {
+        "ST": (3, 35),
+        "LM": (8, 10),
+        "LCM": (8, 25),
+        "CM": (8, 35),
+        "RCM": (8, 45),
+        "RM": (8, 60),
+        "LB": (18, 10),
+        "LCB": (18, 28),
+        "RCB": (18, 42),
+        "RB": (18, 65),
         "GK": (23, 36)
     }
 }
@@ -141,21 +239,131 @@ FORMATION_POSITIONS = {
         "CM2": "CM",
         "LWB": "LB",
         "LCB": "CB",
+        "CB": "CB",
         "RCB": "CB",
-        "CB3": "CB",
         "RWB": "RB",
+        "GK": "GK"
+    },
+    "4-4-2": {
+        "ST1": "ST",
+        "ST2": "ST",
+        "LM": "LM",
+        "LCM": "CM",
+        "RCM": "CM",
+        "RM": "RM",
+        "LB": "LB",
+        "LCB": "CB",
+        "RCB": "CB",
+        "RB": "RB",
+        "GK": "GK"
+    },
+    "4-4-2 diamond": {
+        "ST1": "ST",
+        "ST2": "ST",
+        "CAM": "CAM",
+        "LCM": "CM",
+        "RCM": "CM",
+        "CDM": "CDM",
+        "LB": "LB",
+        "LCB": "CB",
+        "RCB": "CB",
+        "RB": "RB",
+        "GK": "GK"
+    },
+    "3-5-2": {
+        "ST1": "ST",
+        "ST2": "ST",
+        "LM": "LM",
+        "LCM": "CM",
+        "CM": "CM",
+        "RCM": "CM",
+        "RM": "RM",
+        "LCB": "CB",
+        "CB": "CB",
+        "RCB": "CB",
+        "GK": "GK"
+    },
+    "5-3-2": {
+        "ST1": "ST",
+        "ST2": "ST",
+        "LCM": "CM",
+        "CM": "CM",
+        "RCM": "CM",
+        "LWB": "LB",
+        "LCB": "CB",
+        "CB": "CB",
+        "RCB": "CB",
+        "RWB": "RB",
+        "GK": "GK"
+    },
+    "4-1-4-1": {
+        "ST": "ST",
+        "LM": "LM",
+        "LCM": "CM",
+        "RCM": "CM",
+        "RM": "RM",
+        "CDM": "CDM",
+        "LB": "LB",
+        "LCB": "CB",
+        "RCB": "CB",
+        "RB": "RB",
+        "GK": "GK"
+    },
+    "3-4-3": {
+        "ST": "ST",
+        "LW": "LW",
+        "RW": "RW",
+        "LM": "LM",
+        "LCM": "CM",
+        "RCM": "CM",
+        "RM": "RM",
+        "LCB": "CB",
+        "CB": "CB",
+        "RCB": "CB",
+        "GK": "GK"
+    },
+    "4-5-1": {
+        "ST": "ST",
+        "LM": "LM",
+        "LCM": "CM",
+        "CM": "CM",
+        "RCM": "CM",
+        "RM": "RM",
+        "LB": "LB",
+        "LCB": "CB",
+        "RCB": "CB",
+        "RB": "RB",
         "GK": "GK"
     }
 }
 
+# ---------------------------------------------------------------------------
+
+# Helper Functions
+# ---------------------------------------------------------------------------
+
 def clear_screen():
-    os.system('clear' if os.name == 'posix' else 'cls')
+    """Clear the terminal screen for both Windows and macOS/Linux"""
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def display_player_names(team):
+    """Display a list of all player names in the team"""
     players = list(team.players.keys())
     print(f"Players: {players}")
 
+def safe_write(pitch, y, x, text, HEIGHT, WIDTH):
+    """Safely write text to pitch at given coordinates"""
+    if 0 <= y < HEIGHT:
+        for i, char in enumerate(text):
+            if 0 <= x + i < WIDTH:
+                pitch[y][x + i] = char
+
+# ---------------------------------------------------------------------------
+# User Interface Functions
+# ---------------------------------------------------------------------------
+
 def display_menu():
+    """Display the main menu and return the user's choice"""
     options = [
         "Add new player",
         "View player ratings",
@@ -185,7 +393,38 @@ def display_menu():
             pass
         print("Invalid choice. Please try again.")
 
+def add_new_player(team):
+    """Add a new player to the team and optionally rate them"""
+    clear_screen()
+    name = input("\nEnter player name (or press Enter to go back): ").strip().title()
+    if not name:
+        return
+        
+    if team.get_player(name):
+        print(f"\nPlayer '{name}' already exists!")
+        input("\nPress Enter to continue...")
+        return
+            
+    team.add_player(name)
+    print(f"\nAdded player: {name}")
+    rate_player(team, name)  # Pass the name directly to rate_player
+
+def view_player_ratings(team):
+    """View detailed ratings for a specific player"""
+    while True:
+        clear_screen()
+        display_player_names(team)
+        name = input("Enter player name (or press Enter to exit): ").strip().title()
+        
+        if not name:  # Exit if user just presses Enter
+            break
+            
+        team.display_player_ratings(name)
+        
+        input("\nPress Enter to continue...")
+
 def rate_player(team, player_name=None):
+    """Rate a player's abilities in different positions"""
     clear_screen()
     display_player_names(team)
     if player_name is None:
@@ -347,6 +586,7 @@ def modify_player_rating(team):
     input("\nPress Enter to continue...")
 
 def compare_players(team):
+    """Compare players' ratings across positions"""
     clear_screen()
     display_player_names(team)
     print("Enter player names to compare (press Enter when done, or type 'ALL' to select all players)")
@@ -463,122 +703,8 @@ def compare_players(team):
     console.print(table)
     input("\nPress Enter to continue...")
 
-def show_best_lineup(team, formation=None):
-    clear_screen()
-    width = 75
-    height = 25
-
-    # If no formation specified, let user choose
-    if formation is None:
-        print("Available formations:")
-        for i, form in enumerate(FORMATION_LAYOUTS.keys(), 1):
-            print(f"{i}. {form}")
-        
-        while True:
-            try:
-                choice = int(input("\nSelect formation (enter number): "))
-                if 1 <= choice <= len(FORMATION_LAYOUTS):
-                    formation = list(FORMATION_LAYOUTS.keys())[choice - 1]
-                    break
-                print("Invalid choice. Please try again.")
-            except ValueError:
-                print("Please enter a number.")
-    
-    # Get lineup data with the selected formation
-    lineup = team.get_best_lineup(formation, FORMATION_POSITIONS[formation])
-    
-    # Create the pitch
-    pitch = [[' ' for _ in range(width)] for _ in range(height)]
-    
-    # Draw borders and lines
-    for i in range(height):
-        pitch[i][0] = '|'
-        pitch[i][width - 1] = '|'
-    for i in range(width):
-        pitch[0][i] = '-'
-        pitch[height - 1][i] = '-'
-        
-    # Add corners
-    pitch[0][0] = "┌"
-    pitch[0][width - 1] = "┐"
-    pitch[height - 1][0] = "└"
-    pitch[height - 1][width - 1] = "┘"
-    
-    # Draw penalty area
-    penalty_width = width // 2
-    penalty_height = height // 3
-    penalty_start_x = (width - penalty_width) // 2
-    for y in range(penalty_height):
-        pitch[height - 1 - y][penalty_start_x-1] = '|'
-        pitch[height - 1 - y][penalty_start_x + penalty_width] = '|'
-    for x in range(penalty_width):
-        pitch[height - 1 - penalty_height][x + penalty_start_x] = '-'
-
-    # Draw goal area
-    goal_width = width // 3
-    goal_height = height // 6
-    goal_start_x = (width - goal_width) // 2
-    for y in range(goal_height):
-        pitch[height - 1 - y][goal_start_x - 1] = '|'
-        pitch[height - 1 - y][goal_start_x + goal_width] = '|'
-    for x in range(goal_width):
-        pitch[height - 1 - goal_height][x + goal_start_x] = '-'
-
-    def safe_write(y, x, text):
-        """Safely write text to pitch at given coordinates"""
-        if 0 <= y < height:
-            for i, char in enumerate(text):
-                if 0 <= x + i < width:
-                    pitch[y][x + i] = char
-    
-    # Add players to the pitch
-    for pos, coords in FORMATION_LAYOUTS[formation].items():
-        y, x = coords
-        if pos in lineup:
-            player, rating = lineup[pos]
-            # Draw player icon
-            safe_write(y, x, "□")
-            
-            # Write position
-            pos_x = max(0, x - len(pos) // 2)
-            safe_write(y - 1, pos_x, pos)
-            
-            # Write player name
-            name = player[:7] if player != "AI" else "AI"
-            name_x = max(0, x - len(name) // 2)
-            safe_write(y + 1, name_x, name)
-            
-            # Write rating
-            if player != "AI":
-                rating_str = f"({rating:.1f})"
-                rating_x = max(0, x - len(rating_str) // 2)
-                safe_write(y + 2, rating_x, rating_str)
-    
-    # Print formation at top
-    formation_text = f"=== Suggested Best Lineup ({formation}) ==="
-    x_offset = (width - len(formation_text)) // 2
-    safe_write(0, x_offset, formation_text)
-    
-    # Print the pitch
-    print("\nPitch Layout:")
-    for row in pitch:
-        print(''.join(row))
-    
-    # Print detailed player list
-    print("\nDetailed Player List:")
-    table = Table(show_header=True, header_style="bold", box=box.SIMPLE)
-    table.add_column("Position")
-    table.add_column("Player")
-    table.add_column("Rating")
-    
-    for pos, (player, rating) in lineup.items():
-        rating_str = f"{rating:.1f}" if player != "AI" else "-"
-        table.add_row(pos, player, rating_str)
-    
-    console.print(table)
-    input("\nPress Enter to continue...")
-
 def show_position_rankings(team):
+    """Display rankings of players for a specific position"""
     clear_screen()
     position = input("Enter position to view rankings: ").strip().upper()
     
@@ -601,6 +727,7 @@ def show_position_rankings(team):
     input("\nPress Enter to continue...")
 
 def show_position_gaps(team):
+    """Show positions with insufficient coverage or low ratings"""
     clear_screen()
     print("\n=== Position Coverage Gaps ===\n")
     
@@ -624,41 +751,160 @@ def show_position_gaps(team):
     print("\nNote: Positions shown have average rating below 3.0 or no ratings")
     input("\nPress Enter to continue...")
 
-def view_player_ratings(team):
+def pick_formation(team):
+    print("Available formations:")
+    for i, form in enumerate(FORMATION_LAYOUTS.keys(), 1):
+        print(f"{i}. {form}")
+    
     while True:
-        clear_screen()
-        display_player_names(team)
-        name = input("Enter player name (or press Enter to exit): ").strip().title()
-        
-        if not name:  # Exit if user just presses Enter
-            break
-            
-        team.display_player_ratings(name)
-        
-        input("\nPress Enter to continue...")
-
-def add_new_player(team):
+        try:
+            choice = int(input("\nSelect formation (enter number): "))
+            if 1 <= choice <= len(FORMATION_LAYOUTS):
+                formation = list(FORMATION_LAYOUTS.keys())[choice - 1]
+                break
+            print("Invalid choice. Please try again.")
+        except ValueError:
+            print("Please enter a number.")
+    
+    # Select lineup type
+    lineup_types = ["Best Overall", "Balanced", "Attack-Focused"]
+    print("\nLineup Types:")
+    for i, lineup_type in enumerate(lineup_types, 1):
+        print(f"{i}. {lineup_type}")
+    
+    lineup_choice = 0
+    while True:
+        try:
+            lineup_choice = int(input("\nSelect lineup type (enter number): "))
+            if 1 <= lineup_choice <= len(lineup_types):
+                break
+            print("Invalid choice. Please try again.")
+        except ValueError:
+            print("Please enter a number.")
+    
     clear_screen()
-    name = input("\nEnter player name (or press Enter to go back): ").strip().title()
-    if not name:
-        return
+
+    # Generate the appropriate lineup based on type
+    if lineup_choice == 1:  # Best Overall
+        lineup = team.get_best_lineup(formation, FORMATION_POSITIONS[formation])
+        lineup_title = "Best Overall Lineup"
+    elif lineup_choice == 2:  # Balanced
+        lineup = team.get_balanced_lineup(formation, FORMATION_POSITIONS[formation])
+        lineup_title = "Balanced Lineup"
+    else:  # Attack-Focused
+        lineup = team.get_attack_focused_lineup(formation, FORMATION_POSITIONS[formation])
+        lineup_title = "Attack-Focused Lineup"
+    
+    return [formation, lineup, lineup_title]
+
+def create_pitch():
+    # Create the pitch
+    pitch = [[' ' for _ in range(WIDTH)] for _ in range(HEIGHT)]
+
+    # Draw borders and lines
+    for i in range(HEIGHT):
+        pitch[i][0] = '|'
+        pitch[i][WIDTH - 1] = '|'
+    for i in range(WIDTH):
+        pitch[0][i] = '-'
+        pitch[HEIGHT - 1][i] = '-'
         
-    if team.get_player(name):
-        print(f"\nPlayer '{name}' already exists!")
-        input("\nPress Enter to continue...")
-        return
+    # Add corners
+    pitch[0][0] = "┌"
+    pitch[0][WIDTH - 1] = "┐"
+    pitch[HEIGHT - 1][0] = "└"
+    pitch[HEIGHT - 1][WIDTH - 1] = "┘"
+    
+    # Draw penalty area
+    penalty_WIDTH = WIDTH // 2
+    penalty_HEIGHT = HEIGHT // 3
+    penalty_start_x = (WIDTH - penalty_WIDTH) // 2
+    for y in range(penalty_HEIGHT):
+        pitch[HEIGHT - 1 - y][penalty_start_x-1] = '|'
+        pitch[HEIGHT - 1 - y][penalty_start_x + penalty_WIDTH] = '|'
+    for x in range(penalty_WIDTH):
+        pitch[HEIGHT - 1 - penalty_HEIGHT][x + penalty_start_x] = '-'
+
+    # Draw goal area
+    goal_WIDTH = WIDTH // 3
+    goal_HEIGHT = HEIGHT // 6
+    goal_start_x = (WIDTH - goal_WIDTH) // 2
+    for y in range(goal_HEIGHT):
+        pitch[HEIGHT - 1 - y][goal_start_x - 1] = '|'
+        pitch[HEIGHT - 1 - y][goal_start_x + goal_WIDTH] = '|'
+    for x in range(goal_WIDTH):
+        pitch[HEIGHT - 1 - goal_HEIGHT][x + goal_start_x] = '-'
+    
+    return pitch
+
+def show_best_lineup(team):
+    """Display the best possible lineup based on player ratings"""
+    clear_screen()
+
+    formation, lineup, lineup_title = pick_formation(team)
+    
+    pitch = create_pitch()
+    
+    # Add players to the pitch
+    for pos, coords in FORMATION_LAYOUTS[formation].items():
+        y, x = coords
+        if pos in lineup:
+            player, rating = lineup[pos]
+            # Draw player icon
+            safe_write(pitch, y, x, "□", HEIGHT, WIDTH)
             
-    team.add_player(name)
-    print(f"\nAdded player: {name}")
-    rate_player(team, name)  # Pass the name directly to rate_player
+            # Write position
+            pos_x = max(0, x - len(pos) // 2)
+            safe_write(pitch, y - 1, pos_x, pos, HEIGHT, WIDTH)
+            
+            # Write player name
+            name = player[:7] if player != "AI" else "AI"
+            name_x = max(0, x - len(name) // 2)
+            safe_write(pitch, y + 1, name_x, name, HEIGHT, WIDTH)
+            
+            # Write rating
+            if player != "AI":
+                rating_str = f"({rating:.1f})"
+                rating_x = max(0, x - len(rating_str) // 2)
+                safe_write(pitch, y + 2, rating_x, rating_str, HEIGHT, WIDTH)
+    
+    # Print formation at top
+    formation_text = f"=== {lineup_title} ({formation}) ==="
+    x_offset = (WIDTH - len(formation_text)) // 2
+    safe_write(pitch, 0, x_offset, formation_text, HEIGHT, WIDTH)
+    
+    # Print the pitch
+    print("\nPitch Layout:")
+    for row in pitch:
+        print(''.join(row))
+    
+    # Print detailed player list
+    print("\nDetailed Player List:")
+    table = Table(show_header=True, header_style="bold", box=box.SIMPLE)
+    table.add_column("Position")
+    table.add_column("Player")
+    table.add_column("Rating")
+    
+    for pos, (player, rating) in lineup.items():
+        rating_str = f"{rating:.1f}" if player != "AI" else "-"
+        table.add_row(pos, player, rating_str)
+    
+    console.print(table)
+    
+    input("\nPress Enter to continue...")
+
+# ---------------------------------------------------------------------------
+# Main Function
+# ---------------------------------------------------------------------------
 
 def main():
+    """Main function that runs the application"""
     team = Team("Pro Clubs FC")
 
     while True:
-        choice = display_menu()
         clear_screen()
-
+        choice = display_menu()
+        
         if choice == 1:
             add_new_player(team)
             team.save_players()
@@ -668,16 +914,18 @@ def main():
             rate_player(team)
             team.save_players()
         elif choice == 4:
-            modify_player_rating(team)  # New option
+            modify_player_rating(team)
         elif choice == 5:
             compare_players(team)
         elif choice == 6:
             show_best_lineup(team)
+            # Add explicit clear_screen call after returning from show_best_lineup
+            clear_screen()
         elif choice == 7:
             show_position_rankings(team)
         elif choice == 8:
             show_position_gaps(team)
-        elif choice == 9:  # Changed from 8 to 9
+        elif choice == 9:
             team.save_players()
             print("Goodbye!")
             break

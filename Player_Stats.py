@@ -112,6 +112,7 @@ class Team:
             formation (str): The formation name (e.g., "4-3-3 attacking")
             position_mapping (dict): Maps formation positions to actual positions
         """
+        print(formation)
         # Priority order: Attack -> Midfield -> Defense -> Goalkeeper
         position_priority = [
             'ST', 'LW', 'RW', 'CAM',  # Prioritize attacking
@@ -235,6 +236,198 @@ class Team:
                         lineup[left_pos] = (right_player, right_rating)
                         lineup[right_pos] = ("AI", 0.0)
 
+        return lineup
+
+    def get_balanced_lineup(self, formation, position_mapping):
+        """
+        Generate a balanced lineup that distributes talent across all areas of the field.
+        
+        Args:
+            formation (str): The formation name (e.g., "4-3-3 attacking")
+            position_mapping (dict): Maps formation positions to actual positions
+        """
+        # First, get all player ratings for each position
+        all_ratings = {}
+        for player in self.players.values():
+            for formation_key, actual_pos in position_mapping.items():
+                rating = player.positions[actual_pos]
+                if rating['min'] > 0:  # Only consider rated positions
+                    all_ratings[(player.name, formation_key)] = rating['min']
+        
+        # Group positions by field area
+        field_areas = {
+            "defense": ["LB", "RB", "CB", "LCB", "RCB", "LWB", "RWB"],
+            "midfield": ["CDM", "CM", "LM", "RM", "LCM", "RCM", "CM1", "CM2"],
+            "attack": ["CAM", "ST", "LW", "RW", "ST1", "ST2", "LAM", "RAM"]
+        }
+        
+        # Reverse mapping from formation position to field area
+        position_to_area = {}
+        for area, positions in field_areas.items():
+            for pos in positions:
+                position_to_area[pos] = area
+        
+        # Split positions by area
+        positions_by_area = {area: [] for area in field_areas}
+        for pos in position_mapping.keys():
+            area = next((a for a in field_areas if any(p in pos for p in field_areas[a])), "midfield")
+            positions_by_area[area].append(pos)
+        
+        # Order players by overall average rating
+        player_overall_ratings = {}
+        for player in self.players.values():
+            valid_ratings = [r['min'] for _, r in player.positions.items() if r['min'] > 0]
+            if valid_ratings:
+                player_overall_ratings[player.name] = sum(valid_ratings) / len(valid_ratings)
+        
+        sorted_players = sorted(player_overall_ratings.items(), key=lambda x: x[1], reverse=True)
+        
+        # Allocate the top players evenly across areas
+        area_allocations = {area: [] for area in field_areas}
+        area_cycle = ["defense", "midfield", "attack"] * (len(sorted_players) // 3 + 1)
+        
+        for i, (player_name, _) in enumerate(sorted_players):
+            if i < len(area_cycle):
+                area_allocations[area_cycle[i]].append(player_name)
+        
+        # Create the lineup
+        lineup = {}
+        assigned_players = set()
+        
+        # For each area, assign the allocated players to their best positions
+        for area, players in area_allocations.items():
+            area_positions = positions_by_area[area]
+            player_position_ratings = []
+            
+            # Get all player-position ratings for this area
+            for player_name in players:
+                if player_name not in assigned_players:  # Ensure player hasn't been assigned yet
+                    for pos in area_positions:
+                        if (player_name, pos) in all_ratings:
+                            player_position_ratings.append((player_name, pos, all_ratings[(player_name, pos)]))
+            
+            # Sort by rating (highest first)
+            player_position_ratings.sort(key=lambda x: x[2], reverse=True)
+            
+            # Assign players to positions
+            for player_name, pos, rating in player_position_ratings:
+                if pos not in lineup and player_name not in assigned_players:
+                    lineup[pos] = (player_name, rating)
+                    assigned_players.add(player_name)
+        
+        # Fill any unassigned positions with other players or AI
+        remaining_positions = [pos for pos in position_mapping if pos not in lineup]
+        remaining_players = [p.name for p in self.players.values() if p.name not in assigned_players]
+        
+        if remaining_positions:
+            # Create a matrix of ratings for remaining players and positions
+            remaining_ratings = []
+            for player_name in remaining_players:
+                for pos in remaining_positions:
+                    if (player_name, pos) in all_ratings:
+                        remaining_ratings.append((player_name, pos, all_ratings[(player_name, pos)]))
+            
+            # Sort by rating
+            remaining_ratings.sort(key=lambda x: x[2], reverse=True)
+            
+            # Assign remaining players to positions
+            for player_name, pos, rating in remaining_ratings:
+                if pos not in lineup and player_name not in assigned_players:
+                    lineup[pos] = (player_name, rating)
+                    assigned_players.add(player_name)
+        
+        # Fill any still unassigned positions with AI
+        for pos in position_mapping:
+            if pos not in lineup:
+                lineup[pos] = ("AI", 0.0)
+        
+        return lineup
+
+    def get_attack_focused_lineup(self, formation, position_mapping):
+        """
+        Generate an attack-focused lineup that prioritizes placing best players in attacking positions.
+        
+        Args:
+            formation (str): The formation name (e.g., "4-3-3 attacking")
+            position_mapping (dict): Maps formation positions to actual positions
+        """
+        # First, get all player ratings for each position
+        all_ratings = {}
+        for player in self.players.values():
+            for formation_key, actual_pos in position_mapping.items():
+                rating = player.positions[actual_pos]
+                if rating['min'] > 0:  # Only consider rated positions
+                    all_ratings[(player.name, formation_key)] = rating['min']
+        
+        # Define attacking positions (adjust based on formation)
+        attacking_positions = [
+            "ST", "ST1", "ST2", "LW", "RW", "CAM", "LAM", "RAM"
+        ]
+        
+        # Calculate player overall ratings (for non-attacking positions)
+        player_overall_ratings = {}
+        for player in self.players.values():
+            valid_ratings = [r['min'] for p, r in player.positions.items() 
+                            if r['min'] > 0 and p not in ["ST", "LW", "RW", "CAM"]]
+            if valid_ratings:
+                player_overall_ratings[player.name] = sum(valid_ratings) / len(valid_ratings)
+        
+        # Start with attacking positions
+        lineup = {}
+        attacking_assignments = []
+        
+        # Get all player ratings for attacking positions
+        for player in self.players.values():
+            for pos_key in position_mapping:
+                if any(attack_pos in pos_key for attack_pos in attacking_positions):
+                    actual_pos = position_mapping[pos_key]
+                    rating = player.positions[actual_pos]
+                    if rating['min'] > 0:
+                        attacking_assignments.append((player.name, pos_key, rating['min']))
+        
+        # Sort attacking assignments by rating
+        attacking_assignments.sort(key=lambda x: x[2], reverse=True)
+        
+        # Assign players to attacking positions
+        assigned_players = set()
+        for player_name, pos, rating in attacking_assignments:
+            if pos not in lineup and player_name not in assigned_players:
+                lineup[pos] = (player_name, rating)
+                assigned_players.add(player_name)
+        
+        # Fill remaining positions with other players
+        remaining_positions = [pos for pos in position_mapping if pos not in lineup]
+        remaining_players = [p.name for p in self.players.values() if p.name not in assigned_players]
+        
+        # Sort remaining players by overall rating
+        sorted_remaining_players = sorted(
+            [(player, player_overall_ratings.get(player, 0)) 
+            for player in remaining_players],
+            key=lambda x: x[1], 
+            reverse=True
+        )
+        
+        # Create a cost matrix for remaining assignments
+        remaining_ratings = []
+        for player_name, _ in sorted_remaining_players:
+            for pos in remaining_positions:
+                if (player_name, pos) in all_ratings:
+                    remaining_ratings.append((player_name, pos, all_ratings[(player_name, pos)]))
+        
+        # Sort by rating
+        remaining_ratings.sort(key=lambda x: x[2], reverse=True)
+        
+        # Assign remaining players
+        for player_name, pos, rating in remaining_ratings:
+            if pos not in lineup and player_name not in assigned_players:
+                lineup[pos] = (player_name, rating)
+                assigned_players.add(player_name)
+        
+        # Fill any remaining positions with AI
+        for pos in position_mapping:
+            if pos not in lineup:
+                lineup[pos] = ("AI", 0.0)
+        
         return lineup
 
     def compare_players(self, player_names, position=None):
