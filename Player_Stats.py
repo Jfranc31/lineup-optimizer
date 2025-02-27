@@ -103,7 +103,7 @@ class Team:
                 gaps[pos] = ratings
         return gaps
 
-    def get_best_lineup(self, formation, position_mapping):
+    def get_best_lineup(self, players_selected, formation, position_mapping):
         """
         Suggest optimal positions for all players based on formation, prioritizing attacking positions
         and considering side preferences (left/right) based on ratings in nearby positions.
@@ -112,7 +112,7 @@ class Team:
             formation (str): The formation name (e.g., "4-3-3 attacking")
             position_mapping (dict): Maps formation positions to actual positions
         """
-        print(formation)
+        players = [self.get_player(name) for name in players_selected if self.get_player(name)]
         # Priority order: Attack -> Midfield -> Defense -> Goalkeeper
         position_priority = [
             'ST', 'LW', 'RW', 'CAM',  # Prioritize attacking
@@ -123,7 +123,7 @@ class Team:
     
         # First pass: Create a list of best players for each position
         all_ratings = {}
-        for player in self.players.values():
+        for player in players:
             for formation_key, actual_pos in position_mapping.items():
                 rating = player.positions[actual_pos]
                 if rating['min'] > 0:  # Only consider rated positions
@@ -134,9 +134,9 @@ class Team:
         check_positions = all_positions.copy()
 
         # Create cost matrix for Hungarian algorithm
-        cost_matrix = np.zeros((len(all_positions), len(self.players)))
+        cost_matrix = np.zeros((len(all_positions), len(players)))
 
-        player_list = list(self.players.values())
+        player_list = list(players)
         player_names = [player.name for player in player_list]
 
         # Fill the cost matrix with negative ratings (since we want to maximize)
@@ -238,7 +238,7 @@ class Team:
 
         return lineup
 
-    def get_balanced_lineup(self, formation, position_mapping):
+    def get_balanced_lineup(self, players_selected, formation, position_mapping):
         """
         Generate a balanced lineup that distributes talent across all areas of the field.
         
@@ -246,9 +246,10 @@ class Team:
             formation (str): The formation name (e.g., "4-3-3 attacking")
             position_mapping (dict): Maps formation positions to actual positions
         """
+        players = [self.get_player(name) for name in players_selected if self.get_player(name)]
         # First, get all player ratings for each position
         all_ratings = {}
-        for player in self.players.values():
+        for player in players:
             for formation_key, actual_pos in position_mapping.items():
                 rating = player.positions[actual_pos]
                 if rating['min'] > 0:  # Only consider rated positions
@@ -275,7 +276,7 @@ class Team:
         
         # Order players by overall average rating
         player_overall_ratings = {}
-        for player in self.players.values():
+        for player in players:
             valid_ratings = [r['min'] for _, r in player.positions.items() if r['min'] > 0]
             if valid_ratings:
                 player_overall_ratings[player.name] = sum(valid_ratings) / len(valid_ratings)
@@ -343,7 +344,7 @@ class Team:
         
         return lineup
 
-    def get_attack_focused_lineup(self, formation, position_mapping):
+    def get_attack_focused_lineup(self, players_selected, formation, position_mapping):
         """
         Generate an attack-focused lineup that prioritizes placing best players in attacking positions.
         
@@ -351,9 +352,10 @@ class Team:
             formation (str): The formation name (e.g., "4-3-3 attacking")
             position_mapping (dict): Maps formation positions to actual positions
         """
+        players = [self.get_player(name) for name in players_selected if self.get_player(name)]
         # First, get all player ratings for each position
         all_ratings = {}
-        for player in self.players.values():
+        for player in players:
             for formation_key, actual_pos in position_mapping.items():
                 rating = player.positions[actual_pos]
                 if rating['min'] > 0:  # Only consider rated positions
@@ -366,7 +368,7 @@ class Team:
         
         # Calculate player overall ratings (for non-attacking positions)
         player_overall_ratings = {}
-        for player in self.players.values():
+        for player in players:
             valid_ratings = [r['min'] for p, r in player.positions.items() 
                             if r['min'] > 0 and p not in ["ST", "LW", "RW", "CAM"]]
             if valid_ratings:
@@ -377,7 +379,7 @@ class Team:
         attacking_assignments = []
         
         # Get all player ratings for attacking positions
-        for player in self.players.values():
+        for player in players:
             for pos_key in position_mapping:
                 if any(attack_pos in pos_key for attack_pos in attacking_positions):
                     actual_pos = position_mapping[pos_key]
@@ -456,15 +458,39 @@ class Team:
         players_ratings = []
         for player in self.players.values():
             rating = player.positions[position]
-            if rating['max'] > 0:  # Only include rated players
+            if rating['min'] > 0:  # Only include rated players
+                # Determine if this is a range or single value
+                is_range = rating['min'] != rating['max']
+                # Add a flag (0 for range, 1 for single value) to prioritize single values
+                priority_flag = 0 if is_range else 1
                 players_ratings.append((
                     player.name,
-                    rating['max'],
+                    rating['max'],  # Max value first for primary sorting
+                    priority_flag,  # Single values prioritized over ranges
+                    rating['min'],  # Min value last
                 ))
         
-        # Sort by rating (desc)
-        players_ratings.sort(key=lambda x: (x[1]), reverse=True)
-        return players_ratings[:limit]
+        # Sort by max rating (desc), then by single/range flag (desc), then by min rating (desc)
+        players_ratings.sort(key=lambda x: (x[1], x[2], x[3]), reverse=True)
+        
+        # Handle tied ratings with same rank
+        ranked_players = []
+        current_rank = 1
+        last_rating = None
+        
+        for i, (name, max_rating, flag, min_rating) in enumerate(players_ratings):
+            if last_rating is None or (max_rating != last_rating[0] or min_rating != last_rating[1]):
+                # New rank if the rating is different from the last one
+                rank = current_rank
+                current_rank += 1
+            else:
+                # If the rating is the same as the last one, assign the same rank
+                rank = ranked_players[-1][1]  # same rank as the previous player
+            
+            ranked_players.append((name, rank, max_rating, min_rating))
+            last_rating = (max_rating, min_rating)
+        
+        return ranked_players[:limit]
 
     def get_player(self, player_name):
         formatted_name = player_name.strip().title()

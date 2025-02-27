@@ -585,11 +585,7 @@ def modify_player_rating(team):
     team.save_players()
     input("\nPress Enter to continue...")
 
-def compare_players(team):
-    """Compare players' ratings across positions"""
-    clear_screen()
-    display_player_names(team)
-    print("Enter player names to compare (press Enter when done, or type 'ALL' to select all players)")
+def pick_players(team):
     players = []
     while True:
         name = input("Enter player name (or 'ALL' for all players): ").strip().title()
@@ -618,6 +614,14 @@ def compare_players(team):
     if len(players) < 2:
         print("Need at least 2 players to compare!")
         return
+    return players
+
+def compare_players(team):
+    """Compare players' ratings across positions"""
+    clear_screen()
+    display_player_names(team)
+    print("Enter player names to compare (press Enter when done, or type 'ALL' to select all players)")
+    players = pick_players(team)
     
     position = input("\nEnter position to compare (or press Enter for all): ").strip().upper()
     if position and position != 'ALL' and position not in POSITIONS:
@@ -712,14 +716,23 @@ def show_position_rankings(team):
         print("Invalid position!")
         return
     
-    top_players = team.get_top_players_by_position(position, limit=None)  # Get all players
-    if not top_players:
+    ranked_players = team.get_top_players_by_position(position, limit=None)  # Get all players
+    if not ranked_players:
         print(f"No players rated for {position}")
         return
     
     print(f"\n=== Rankings for {position} ===\n")
-    rankings_data = [(i+1, name, f"{rating:.1f}") 
-                    for i, (name, rating) in enumerate(top_players)]
+    
+    # Format the display data with proper ranking and rating presentation
+    rankings_data = []
+    for name, rank, max_rating, min_rating in ranked_players:
+        # Check if it's a range or single value
+        if max_rating == min_rating:
+            rating_display = f"{max_rating:.1f}"
+        else:
+            rating_display = f"{min_rating:.1f}-{max_rating:.1f}"
+        
+        rankings_data.append([rank, name, rating_display])
     
     print(tabulate(rankings_data, 
                   headers=['Rank', 'Player', 'Rating'],
@@ -766,6 +779,9 @@ def pick_formation(team):
         except ValueError:
             print("Please enter a number.")
     
+    print("Enter player names for lineup (press Enter when done, or type 'ALL' to select all players)")
+    players = pick_players(team)
+    
     # Select lineup type
     lineup_types = ["Best Overall", "Balanced", "Attack-Focused"]
     print("\nLineup Types:")
@@ -786,13 +802,13 @@ def pick_formation(team):
 
     # Generate the appropriate lineup based on type
     if lineup_choice == 1:  # Best Overall
-        lineup = team.get_best_lineup(formation, FORMATION_POSITIONS[formation])
+        lineup = team.get_best_lineup(players, formation, FORMATION_POSITIONS[formation])
         lineup_title = "Best Overall Lineup"
     elif lineup_choice == 2:  # Balanced
-        lineup = team.get_balanced_lineup(formation, FORMATION_POSITIONS[formation])
+        lineup = team.get_balanced_lineup(players, formation, FORMATION_POSITIONS[formation])
         lineup_title = "Balanced Lineup"
     else:  # Attack-Focused
-        lineup = team.get_attack_focused_lineup(formation, FORMATION_POSITIONS[formation])
+        lineup = team.get_attack_focused_lineup(players, formation, FORMATION_POSITIONS[formation])
         lineup_title = "Attack-Focused Lineup"
     
     return [formation, lineup, lineup_title]
