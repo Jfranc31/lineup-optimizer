@@ -588,6 +588,7 @@ def modify_player_rating(team):
 def pick_players(team):
     players = []
     while True:
+        display_player_names(team)
         name = input("Enter player name (or 'ALL' for all players): ").strip().title()
         if not name:
             if len(players) > 1:
