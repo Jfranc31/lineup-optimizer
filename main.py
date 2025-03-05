@@ -450,12 +450,16 @@ def rate_player(team, player_name=None):
         print(f"Current rating: {current['min']}-{current['max']}")
         
         # Show top 3 players in this position for comparison
-        top_players = team.get_top_players_by_position(position)
+        top_players = team.get_top_players_by_position(position, limit=3)
+        console.log("topPlayers: ", top_players)
         if top_players:
             print("Top rated players in this position:")
-            for p_name, rating in top_players:
+            for p_name, rank, top_rating, bot_rating in top_players:
                 if p_name != player_name:  # Don't show the current player
-                    print(f"- {p_name}: {rating}")
+                    if top_rating != bot_rating:
+                        print(f"- {p_name}: {bot_rating}-{top_rating}")
+                    else:
+                        print(f"- {p_name}: {bot_rating}")
         
         while True:
             rating = input(f"Enter rating for {position}: ").strip().lower()
